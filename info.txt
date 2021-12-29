@@ -1,0 +1,51 @@
+Планировщик по умолчанию выключен, для того чтобы его включить надо добавить в my.ini или в my.cnf
+
+[mysqld]
+event_scheduler = on
+
+    Описание
+Порты BME280:
+0 - Гостинная
+1 - Спальня
+2 - Детская
+3 - Улица парк
+4 - Улица город
+dd if=/dev/sdb1 | dd if=/dev/sdb2 | dd if=/dev/sdb3 | gzip > newredhat.raw.gz
+Relay:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+
+В crone:
+alarm_mess_send.py не нужно
+
+# sudo armbian-config
+# sudo apt-get install gcc python3-dev
+# sudo pip3 install --no-binary :all: psutil
+# SET GLOBAL validate_password.length = 5;
+# SET GLOBAL validate_password.number_count = 0;
+# SET GLOBAL validate_password.mixed_case_count = 0;
+# SET GLOBAL validate_password.special_char_count = 0;
+#
+# REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'max'@'192.168.%.%';
+# DROP USER 'max'@'192.168.%.%';
+# REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'max'@'localhost';
+# DROP USER 'max'@'localhost';
+# CREATE USER 'max'@'192.168.%.%' IDENTIFIED BY 'H1abc7qlazx!@#09@#fvVF';
+# GRANT ALL PRIVILEGES ON * . * TO 'max'@'192.168.%.%';
+# CREATE USER 'max'@'localhost' IDENTIFIED BY 'H1abc7qlazx!@#09@#fvVF';
+# GRANT ALL PRIVILEGES ON * . * TO 'max'@'localhost';
+# FLUSH PRIVILEGES;
