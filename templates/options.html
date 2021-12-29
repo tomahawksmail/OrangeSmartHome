@@ -1,0 +1,312 @@
+{% extends "base.html" %}
+{% block title %}SmartHome CORE ver.{{ version }}{% endblock %}
+
+
+
+
+{% block head %}
+    <!--suppress ALL -->
+<script src='/static/js/Chart.min.js'></script>
+
+{% endblock %}
+
+
+{% block content %}
+<form method="POST" action="options">
+<div class="row">
+    <div class="col-lg-6">
+            <div class="card card-chart">
+                <div class="card-header">
+
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-title">Глобальные настройки</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <script>
+                                function updateTextInputCooler(val) {
+                                    document.getElementById("Cooler").value=val;
+                                }
+                                function updateTextInputzimalimit(val2) {
+                                    document.getElementById("zimalimit").value=val2;
+                                }
+                                function updateTextInputletolimit(val3) {
+                                    document.getElementById("letolimit").value=val3;
+                                }
+                            </script>
+                            <span>
+                                <label for="Cooler" style="display:block">Активация кулера </label>
+                                <input list="tickmarks" id="Cooler2" type="range" min="35" max="70" step="5" value="{{cooler}}" onchange="updateTextInputCooler(this.value);">
+                                <datalist id="tickmarks">
+                                    <option value="35" label="35">
+                                    <option value="40">
+                                    <option value="45">
+                                    <option value="50">
+                                    <option value="55" label="55">
+                                    <option value="60">
+                                    <option value="65">
+                                    <option value="60">
+                                    <option value="70" abel="70">
+                                </datalist>
+                            </span><input  type="text" id="Cooler" name="Cooler" value={{cooler}}>°C</td><br>
+
+
+                            <span>
+                                <label for="zimalimit" style="display:block">Граница влажности зимой</label>
+                                <input id="zimalimit2" type="range"  min="0" max="100" step="1" value="{{zimalimit}}" onchange="updateTextInputzimalimit(this.value);">
+                            </span><input  type="text" id="zimalimit" name="zimalimit" value={{zimalimit}}>%<br>
+
+
+                            <span>
+                                <label for="letolimit" style="display:block">Граница влажности летом</label>
+                                <input id="letolimit2" type="range"  min="0" max="100" step="1" value="{{letolimit}}" onchange="updateTextInputletolimit(this.value);">
+                            </span><input  type="text" id="letolimit" name="letolimit" value={{letolimit}}>%<br>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="col-lg-6">
+            <div class="card card-chart">
+                <div class="card-header">
+
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-title">Администрирование</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <input type="submit" value="Перезагрузка" name="reset">
+                            <input type="submit" value="Выключение" name="shutdown">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+</div>
+<div class="row">
+        <div class="col-lg-6">
+            <div class="card card-chart">
+                <div class="card-header">
+
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-title">Настройки воды в аквариуме</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <script>
+                                function updateTextInputAquaHeater(val4) {
+                                    document.getElementById("AquaHeater").value=val4;
+                                }
+                                function updateTextInputAquaCooler(val5) {
+                                    document.getElementById("AquaCooler").value=val5;
+                                }
+                                // function updateTextInputletolimit(val3) {
+                                //     document.getElementById("letolimit").value=val3;
+                                // }
+                            </script>
+                            <span>
+                                <label for="AquaHeater" style="display:block">Активация подогрева</label>
+                                <input id="AquaHeater2" type="range"  min="15" max="30" step="1" value="{{AquaHeater}}" onchange="updateTextInputAquaHeater(this.value);">
+                            </span><input  type="text" id="AquaHeater" name="AquaHeater" value={{AquaHeater}}>°C
+                            <span>
+                                <label for="AquaCooler" style="display:block">Активация охлаждения</label>
+                                <input id="AquaCooler2" type="range"  min="15" max="30" step="1" value="{{AquaCooler}}" onchange="updateTextInputAquaCooler(this.value);">
+                            </span><input type="text" id="AquaCooler" name="AquaCooler" value={{AquaCooler}}>°C
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card card-chart">
+                <div class="card-header">
+
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-title">Настройки освещения в аквариуме</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+
+                            <table class="table_light" style="font-size: 1.2em">
+                                <tbody>
+                                <tr>
+                                    <td>Канал</td>
+                                    <td>Время активации</td>
+                                    <td>Время деактивации</td>
+                                </tr>
+                                <tr style="color: #ffffff">
+                                    <td class="table_light">1</td>
+                                    <td>
+                                        <select name="houron1">
+                                            {% for option in houron1 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.houron1 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <select name="minon1">
+                                            {% for option in minon1 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.minon1 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="houroff1">
+                                            {% for option in houroff1 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.houroff1 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <select name="minoff1">
+                                            {% for option in minoff1 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.minoff1 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr style="color: #ffffff">
+                                    <td>2</td>
+                                    <td>
+                                        <select name="houron2">
+                                            {% for option in houron2 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.houron2 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <select name="minon2">
+                                            {% for option in minon2 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.minon2 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="houroff2">
+                                            {% for option in houroff2 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.houroff2 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <select name="minoff2">
+                                            {% for option in minoff2 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.minoff2 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr style="color: #ffffff">
+                                    <td>3</td>
+                                    <td>
+                                        <select name="houron3">
+                                            {% for option in houron3 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.houron3 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <select name="minon3">
+                                            {% for option in minon3 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.minon3 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="houroff3">
+                                            {% for option in houroff3 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.houroff3 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <select name="minoff3">
+                                            {% for option in minoff3 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.minoff3 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr style="color: #066ccf">
+                                    <td>4</td>
+                                    <td>
+                                        <select name="houron4">
+                                            {% for option in houron4 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.houron4 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <select name="minon4">
+                                            {% for option in minon4 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.minon4 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="houroff4">
+                                            {% for option in houroff4 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.houroff4 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <select name="minoff4">
+                                            {% for option in minoff4 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.minoff4 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr style="color: #cf0606">
+                                    <td>5</td>
+                                    <td>
+                                        <select name="houron5">
+                                            {% for option in houron5 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.houron5 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <select name="minon5">
+                                            {% for option in minon5 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.minon5 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="houroff5">
+                                            {% for option in houroff5 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.houroff5 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <select name="minoff5">
+                                            {% for option in minoff5 %}
+                                            <option {% if option.Selected %}selected="selected"{% endif %}>{{ option.minoff5 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-chart">
+                <div class="card-header">
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-title"></h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area-submit">
+                            <input type="submit" value="Применить" name="save"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+</div>
+
+</form>
+
+
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

@@ -1,0 +1,54 @@
+table.tableclass {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    border: 1px dotted;
+    border-color: #5200E1;
+}
+
+
+table.tableclass thead th {
+    position: sticky;
+    top: 0;
+
+}
+
+table.tableclass thead th:first-child {
+    left: 0;
+    z-index: 1;
+}
+
+table.tableclass th {
+
+    font-weight: normal;
+    font-size: 14px;
+    color: #fff;
+    background-color: #6a22e1;
+
+
+}
+
+table.tableclass td {
+    border: 1px dotted;
+    border-color: #6a22e1;
+}
+
+
+table.tableclass td, table.tableclass th {
+    padding: 1px 0px;
+    line-height: 12px;
+    vertical-align: middle;
+
+
+}
+
+table.tableclass tr:hover {
+    border: 1px solid #636363;
+    background-color: #f9fafb
+}
+
+table.tableclass tr:hover td {
+    color: #fff;
+    cursor: default;
+    background-color: #3664A3;
+}

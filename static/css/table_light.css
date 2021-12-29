@@ -1,0 +1,14 @@
+table.table_light {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+
+
+}
+table.table_light td {
+    border-right: 1px solid #fff;
+   }
+
+table.table_light tr {
+    border-right: 1px solid #fff;
+   }

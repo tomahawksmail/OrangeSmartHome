@@ -1,0 +1,664 @@
+{% extends "base.html" %}
+{% block title %}SmartHome CORE ver.{{ version }}{% endblock %}
+
+
+
+
+
+{% block head %}
+    <!--suppress ALL -->
+<script src='/static/js/Chart.min.js'></script>
+        <script>
+            setTimeout(function () {
+                location.reload();
+            }, 600000);
+        </script>
+{% endblock %}
+
+
+{% block content %}
+
+    <!-----------------------------1 ----------------->
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="card card-chart">
+                <div class="card-header">
+
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-title">Загрузка ядер процессора, %</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="CPU"></canvas>
+                            <script>
+                                var ctx = document.getElementById('CPU').getContext('2d');
+                                var CPU = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: [{% for item in cpu_load_all %} "{{item[0]}}",  {% endfor %}],
+                                        datasets: [{
+                                            label: 'cpunum01',
+                                            data: [{% for item in cpu_load_all %} {{item[1]}}, {% endfor %}],
+                                            fill: true,
+                                            lineTension: 0.3,
+                                            backgroundColor: "rgba(192,0,0,0.2)",
+                                            borderColor: "rgba(192,0,0,0.5)",
+                                            borderCapStyle: 'butt',
+                                            borderDash: [],
+                                            borderDashOffset: 0.0,
+                                            borderJoinStyle: 'miter',
+                                            pointBorderColor: "rgb(192,0,0)",
+                                            pointBackgroundColor: "#fff",
+                                            pointBorderWidth: 1,
+                                            pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgb(192,0,0)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            pointHoverBorderWidth: 2,
+                                            pointRadius: 1,
+                                            pointHitRadius: 10,
+                                            spanGaps: false,
+                                            borderWidth: 1
+                                        }, {
+                                            label: 'cpunum02',
+                                            data: [{% for item in cpu_load_all %} {{item[2]}}, {% endfor %}],
+                                            fill: true,
+                                            lineTension: 0.3,
+                                            backgroundColor: "rgba(238,231,0,0.2)",
+                                            borderColor: "rgb(238,231,0,0.5)",
+                                            borderCapStyle: 'butt',
+                                            borderDash: [],
+                                            borderDashOffset: 0.0,
+                                            borderJoinStyle: 'miter',
+                                            pointBorderColor: "rgb(238,231,0)",
+                                            pointBackgroundColor: "#fff",
+                                            pointBorderWidth: 1,
+                                            pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgb(238,231,0)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            pointHoverBorderWidth: 2,
+                                            pointRadius: 1,
+                                            pointHitRadius: 10,
+                                            spanGaps: false,
+                                            borderWidth: 1
+                                        }, {
+                                            label: 'cpunum03',
+                                            data: [{% for item in cpu_load_all %} {{item[3]}}, {% endfor %}],
+                                            fill: true,
+                                            lineTension: 0.3,
+                                            backgroundColor: "rgba(11,238,0,0.2)",
+                                            borderColor: "rgba(11,238,0,0.5)",
+                                            borderCapStyle: 'butt',
+                                            borderDash: [],
+                                            borderDashOffset: 0.0,
+                                            borderJoinStyle: 'miter',
+                                            pointBorderColor: "rgba(11,238,0,1)",
+                                            pointBackgroundColor: "#fff",
+                                            pointBorderWidth: 1,
+                                            pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgba(11,238,0,1)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            pointHoverBorderWidth: 2,
+                                            pointRadius: 1,
+                                            pointHitRadius: 10,
+                                            spanGaps: false,
+                                            borderWidth: 1
+                                        }, {
+                                            label: 'cpunum04',
+                                            data: [{% for item in cpu_load_all %} {{item[4]}}, {% endfor %}],
+                                            fill: true,
+                                            lineTension: 0.3,
+                                            backgroundColor: "rgba(0,23,238,0.2)",
+                                            borderColor: "rgb(0,23,238,0.5)",
+                                            borderCapStyle: 'butt',
+                                            borderDash: [],
+                                            borderDashOffset: 0.0,
+                                            borderJoinStyle: 'miter',
+                                            pointBorderColor: "rgb(0,23,238)",
+                                            pointBackgroundColor: "#fff",
+                                            pointBorderWidth: 1,
+                                            pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgb(0,23,238)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            pointHoverBorderWidth: 2,
+                                            pointRadius: 1,
+                                            pointHitRadius: 10,
+                                            spanGaps: false,
+                                            borderWidth: 1
+                                        },
+                                            {
+                                                label: 'усредненно',
+                                                data: [
+                                                    {% for item in cpu_load_all %} {{(item[1]+item[2]+item[3]+item[4])/4}}, {% endfor %}],
+                                                fill: true,
+                                                lineTension: 0.3,
+                                                backgroundColor: "rgba(255,255,255,0.2)",
+                                                borderColor: "rgba(255,255,255,1)",
+                                                borderCapStyle: 'butt',
+                                                borderDash: [],
+                                                borderDashOffset: 0.0,
+                                                borderJoinStyle: 'miter',
+                                                pointBorderColor: "rgb(255,255,255)",
+                                                pointBackgroundColor: "#fff",
+                                                pointBorderWidth: 1,
+                                                pointHoverRadius: 5,
+                                                pointHoverBackgroundColor: "rgb(255,255,255)",
+                                                pointHoverBorderColor: "rgba(220,220,220,1)",
+                                                pointHoverBorderWidth: 2,
+                                                pointRadius: 1,
+                                                pointHitRadius: 10,
+                                                spanGaps: false,
+                                                borderWidth: 1
+                                            }
+                                        ]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        layout: {
+                                            padding: {
+                                                left: 10,
+                                                right: 10,
+                                                top: 10,
+                                                bottom: 10
+                                            },
+                                            animation: {
+                                                duration: 10
+                                            }
+                                        },
+
+                                        scales: {}
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-title">Загрузка процессора, MHz</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="CPUMHz"></canvas>
+                            <script>
+                                var ctx = document.getElementById('CPUMHz').getContext('2d');
+                                var CPUMHz = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: [{% for item in cpu_load_all %} "{{item[0]}}",  {% endfor %}],
+                                        datasets: [{
+                                            label: 'CPUMHz',
+                                            data: [{% for item in cpu_load_all %} {{item[5]}}, {% endfor %}],
+                                            fill: true,
+                                            lineTension: 0.3,
+                                            backgroundColor: "rgba(192,0,0,0.2)",
+                                            borderColor: "rgba(192,0,0,0.5)",
+                                            borderCapStyle: 'butt',
+                                            borderDash: [],
+                                            borderDashOffset: 0.0,
+                                            borderJoinStyle: 'miter',
+                                            pointBorderColor: "rgb(192,0,0)",
+                                            pointBackgroundColor: "#fff",
+                                            pointBorderWidth: 1,
+                                            pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgb(192,0,0)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            pointHoverBorderWidth: 2,
+                                            pointRadius: 1,
+                                            pointHitRadius: 10,
+                                            spanGaps: false,
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        layout: {
+                                            padding: {
+                                                left: 10,
+                                                right: 10,
+                                                top: 10,
+                                                bottom: 10
+                                            },
+                                            animation: {
+                                                duration: 10
+                                            }
+                                        },
+
+                                        scales: {}
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-----------------------------2 ----------------->
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-title">Температура ядра, °C</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="temp"></canvas>
+                            <script>
+                                var ctx = document.getElementById('temp').getContext('2d');
+                                var gradient = ctx.createLinearGradient(0, 0, 0, 200);
+                                    gradient.addColorStop(0, 'rgba(100,0,0,0.8)');
+                                    gradient.addColorStop(0.35, 'rgba(150,100,0,0.8)');
+                                    gradient.addColorStop(0.25, 'rgba(150,150,0,0.8)');
+                                    gradient.addColorStop(0.05, 'rgba(100,150,0,0.8)');
+                                    gradient.addColorStop(1, 'rgba(8,100,0,0.8)');
+                                var temp = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: [{% for item in temp_all %} "{{item[0]}}",  {% endfor %}],
+                                        datasets: [{
+                                            label: 'Температура ядра',
+                                            data: [{% for item in temp_all %} {{item[1]}}, {% endfor %}],
+                                            fill: true,
+                                            lineTension: 0.3,
+                                            backgroundColor: gradient,
+                                            borderColor: "rgba(238,231,0,1)",
+                                            borderCapStyle: 'butt',
+                                            borderDash: [],
+                                            borderDashOffset: 0.0,
+                                            borderJoinStyle: 'miter',
+                                            pointBorderColor: "rgb(238,231,0,238)",
+                                            pointBackgroundColor: "#fff",
+                                            pointBorderWidth: 1,
+                                            pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgb(238,231,0)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            pointHoverBorderWidth: 2,
+                                            pointRadius: 1,
+                                            pointHitRadius: 10,
+                                            spanGaps: false,
+                                            borderWidth: 1
+                                        }, {
+                                            label: 'Отсечка кулера',
+                                            data: [{% for item in temp_all %} {{item[2]}}, {% endfor %}],
+                                            fill: true,
+                                            lineTension: 0.1,
+                                            backgroundColor: "rgba(238,231,0,0.0)",
+                                            borderColor: "rgb(45,255,0)",
+                                            borderCapStyle: 'butt',
+                                            borderDash: [],
+                                            borderDashOffset: 0.0,
+                                            borderJoinStyle: 'miter',
+                                            pointBorderColor: "rgb(45,255,0,238)",
+                                            pointBackgroundColor: "#fff",
+                                            pointBorderWidth: 1,
+                                            pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgb(238,231,0)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            pointHoverBorderWidth: 2,
+                                            pointRadius: 1,
+                                            pointHitRadius: 10,
+                                            spanGaps: false,
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        layout: {
+                                            padding: {
+                                                left: 0,
+                                                right: 0,
+                                                top: 0,
+                                                bottom: 0
+                                            },
+                                            animation: {
+                                                duration: 10
+                                            }
+                                        },
+
+                                        scales: {}
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card card-chart">
+                <div class="card-header">
+
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-title">Загрузка оперативной памяти, Mb</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="RAM"></canvas>
+                            <script>
+                                var ctx = document.getElementById('RAM').getContext('2d');
+                                var RAM = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: [{% for item in RAM_all %} "{{item[0]}}",  {% endfor %}],
+                                        datasets: [{
+                                            label: 'total',
+                                            data: [{% for item in RAM_all %} {{item[1]}}, {% endfor %}],
+                                            fill: true,
+                                            lineTension: 0.3,
+                                            backgroundColor: "rgba(123,104,238,0.2)",
+                                            borderColor: "rgba(123,104,238,1)",
+                                            borderCapStyle: 'butt',
+                                            borderDash: [],
+                                            borderDashOffset: 0.0,
+                                            borderJoinStyle: 'miter',
+                                            pointBorderColor: "rgb(123,104,238)",
+                                            pointBackgroundColor: "#fff",
+                                            pointBorderWidth: 1,
+                                            pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgb(123,104,238)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            pointHoverBorderWidth: 2,
+                                            pointRadius: 1,
+                                            pointHitRadius: 10,
+                                            spanGaps: false,
+                                            borderWidth: 1
+                                        }, {
+                                            label: 'available',
+                                            data: [{% for item in RAM_all %} {{item[2]}}, {% endfor %}],
+                                            fill: true,
+                                            lineTension: 0.3,
+                                            backgroundColor: "rgba(0,238,39,0.2)",
+                                            borderColor: "rgba(0,238,39,1)",
+                                            borderCapStyle: 'butt',
+                                            borderDash: [],
+                                            borderDashOffset: 0.0,
+                                            borderJoinStyle: 'miter',
+                                            pointBorderColor: "rgb(0,238,39)",
+                                            pointBackgroundColor: "#fff",
+                                            pointBorderWidth: 1,
+                                            pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgb(0,238,39)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            pointHoverBorderWidth: 2,
+                                            pointRadius: 1,
+                                            pointHitRadius: 10,
+                                            spanGaps: false,
+                                            borderWidth: 1
+                                        }, {
+                                            label: 'used',
+                                            data: [{% for item in RAM_all %} {{item[3]}}, {% endfor %}],
+                                            fill: true,
+                                            lineTension: 0.3,
+                                            backgroundColor: "rgba(163,0,38,0.2)",
+                                            borderColor: "rgba(163,0,38,1)",
+                                            borderCapStyle: 'butt',
+                                            borderDash: [],
+                                            borderDashOffset: 0.0,
+                                            borderJoinStyle: 'miter',
+                                            pointBorderColor: "rgb(163,0,38)",
+                                            pointBackgroundColor: "#fff",
+                                            pointBorderWidth: 1,
+                                            pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgb(163,0,38)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            pointHoverBorderWidth: 2,
+                                            pointRadius: 1,
+                                            pointHitRadius: 10,
+                                            spanGaps: false,
+                                            borderWidth: 1
+                                        }, {
+                                            label: 'free',
+                                            data: [{% for item in RAM_all %} {{item[4]}}, {% endfor %}],
+                                            fill: true,
+                                            lineTension: 0.3,
+                                            backgroundColor: "rgba(238,233,0,0.2)",
+                                            borderColor: "rgba(238,233,0,1)",
+                                            borderCapStyle: 'butt',
+                                            borderDash: [],
+                                            borderDashOffset: 0.0,
+                                            borderJoinStyle: 'miter',
+                                            pointBorderColor: "rgb(238,233,0)",
+                                            pointBackgroundColor: "#fff",
+                                            pointBorderWidth: 1,
+                                            pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgb(238,233,0)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            pointHoverBorderWidth: 2,
+                                            pointRadius: 1,
+                                            pointHitRadius: 10,
+                                            spanGaps: false,
+                                            borderWidth: 1
+                                        }
+                                        ]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        layout: {
+                                            padding: {
+                                                left: 0,
+                                                right: 0,
+                                                top: 0,
+                                                bottom: 0
+                                            },
+                                            animation: {
+                                                duration: 10
+                                            }
+                                        },
+
+                                        scales: {}
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-----------------------------3 ----------------->
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card card-chart">
+                <div class="card-header">
+
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-title">{{ disca[0] }}, Total =  {{ disca[1] }}, Gb</h5>
+                    </div>
+                    <div class="card-body">
+
+
+                        <div style="width:100%;">
+                            <div style="float:left; width:100%; height:300px;">
+                                <div class="chart-area">
+<!--                                    <h5 class="card-title">{{ disca[0] }} Total =  {{ disca[1] }}, Gb</h5>-->
+<!--                                    <h5 class="card-title">Total =  {{ disca[1] }}, Gb</h5>-->
+                                    <canvas id="disca"></canvas>
+                                    <script>
+                                        var ctx = document.getElementById('disca').getContext('2d');
+                                        var disca = new Chart(ctx, {
+                                            type: 'pie',
+                                            data: {
+                                                labels: ['Used', 'Free'],
+                                                datasets: [{
+                                                    label: '1',
+                                                    data: [ {{ disca[2] }}, {{ disca[3] }} ],
+                                                    fill: true,
+                                                    lineTension: 0.3,
+                                                    backgroundColor: ['rgba(254,255,0,0.3)',
+                                                                      'rgba(0,255,33,0.3)'],
+                                                    borderColor: "rgba(123,104,238,0.2)",
+                                                    borderCapStyle: 'butt',
+                                                    borderDash: [],
+                                                    borderDashOffset: 0.0,
+                                                    borderJoinStyle: 'miter',
+                                                    pointBorderColor: "rgb(123,104,238,)",
+                                                    pointBackgroundColor: "#fff",
+                                                    pointBorderWidth: 1,
+                                                    pointHoverRadius: 5,
+                                                    pointHoverBackgroundColor: "rgb(123,104,238,)",
+                                                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                                                    pointHoverBorderWidth: 2,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 10,
+                                                    spanGaps: false,
+                                                    borderWidth: 1
+                                                },]
+                                            },
+                                            options: {
+                                                borderAlign: 'inner',
+                                                responsive: true,
+                                                maintainAspectRatio: false,
+                                                layout: {
+                                                    padding: {
+                                                        left: 10,
+                                                        right: 10,
+                                                        top: 10,
+                                                        bottom: 10
+                                                    },
+                                                    animation: {
+                                                        duration: 10
+                                                    }
+                                                },
+
+                                                scales: {}
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card card-chart">
+                <div class="card-header">
+
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-title">Размеры баз MySLQ</h5>
+                    </div>
+                    <div class="card-body">
+                        <div style="width:100%;">
+                            <div style="float:left; width:50; height:300px;"></div>
+                            <div>
+                                <div class="chart-area">
+                                    <table border="1" width="100%" align="right">
+                                <thead>
+                                <tr>
+                                    <th align="center">Имя базы</th>
+                                    <th align="center">Размер в Мб</th>
+
+                                </tr>
+                                </thead>
+                                {% for item in MySLQ_all %}
+                                    <tr>
+                                        <td align="center">{{ item[0] }}</td>
+                                        <td align="center">{{ item[1] }}</td>
+                                    </tr>
+                                {% endfor %}
+                                    </table>
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card card-chart">
+                <div class="card-header">
+
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-title">Аварии системы </h5>
+                    </div>
+                    <div class="card-body">
+                        <div style="width:100%;">
+                            <div style="float:left; width:50; height:300px;">
+                            </div>
+                            <div>
+                                <div class="chart-area">
+                                    {% if Errorslog_all == () %}
+                                    <div><h4 class="card-title">Uptime {{ uptimestr }}</h4></div>
+
+
+                                    {% else %}
+                                    <div>Uptime {{ uptimestr }}</div>
+                                     <table border="1" width="100%" align="right">
+                                        <thead align="center">
+                                        <tr>
+                                    <th>ID</th>
+                                    <th>Дата и время</th>
+                                    <th>Функция</th>
+                                    <th>Ошибка</th>
+                                        </tr>
+                                        </thead>
+                                {% for item in Errorslog_all %}
+                                    <tr>
+                                        <td align="center">{{ item[0] }}</td>
+                                        <td align="center">{{ item[1] }}</td>
+                                        <td align="center">{{ item[2] }}</td>
+                                        <td align="center">{{ item[3] }}</td>
+                                    </tr>
+                                {% endfor %}
+                                    </table>
+
+                                    {% endif %}
+
+                                {% if Alarms == () %}
+
+                                    <div>Все в порядке!</div>
+
+                                    {% else %}
+
+                                     <table border="1" width="100%" align="right">
+                                        <thead align="center">
+                                        <tr>
+                                            <th >Время</th>
+                                        </tr>
+                                        </thead>
+                                {% for item in Alarms %}
+                                    <tr>
+                                        <td align="center">{{ item[0] }}</td>
+                                    </tr>
+                                {% endfor %}
+                                    </table>
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+
+
+
+
+
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

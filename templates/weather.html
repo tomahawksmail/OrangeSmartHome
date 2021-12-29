@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% block title %}SmartHome CORE ver.{{ version }}{% endblock %}
+
+
+
+
+
+{% block head %}
+<link href="/static/css/weatherwidgets.css" rel="stylesheet"/>
+<script src='/static/js/Chart.min.js'></script>
+<script>
+    setTimeout(function () {location.reload();}, 3600000);
+</script>
+<script>
+function clock(){
+ var date = new Date(),
+ hours = (date.getHours() < 10) ? '0' + date.getHours() : date.getHours(),
+ minutes = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes(),
+ seconds = (date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds();
+ document.getElementById('clock').innerHTML = hours + ':' + minutes + ':' + seconds;
+}
+setInterval(clock, 1000);
+clock();
+</script>
+<style>
+
+:root {
+    --color:white;
+    --speed: {{data[11]}};
+}
+
+.wind-turbine{
+    position: relative;
+    top: 0.5%;
+    left: 50%;
+}
+
+ .rotor{
+    width: 6em;
+    height: 6em;
+    background-color: var(--color);
+    border-radius: 50%;
+    position: absolute;
+    animation-name: rotate;
+    animation-duration: var(--speed);
+    animation-iteration-count:10000;
+    animation-timing-function: linear;
+}
+@keyframes rotate{
+  from{
+    transform: rotate(360deg);
+  }
+  to{
+    transform: rotate(0deg);
+  }
+}
+.blade{
+    width: 32em;
+    height: 1em;
+    background-color: var(--color);
+    position: absolute;
+    top: 2em;
+    left: 3em;
+    border-radius: 0 3em 5em 0;
+    transform-origin: 0 1em;
+}
+.blade:before{
+    content: "";
+    background-color: var(--color);
+    position: absolute;
+    width: 5em;
+    height: 2em;
+}
+.blade:after{
+    content: "";
+    width: 1.5em;
+    position: absolute;
+    top: 1em;
+    left: 2em;
+    border-top: 2em solid var(--color);
+    border-right: 22em solid transparent;
+    border-left: 6em solid transparent;
+}
+ .blade1{
+    transform: rotate(0deg);
+}
+.blade2{
+    transform: rotate(120deg);
+}
+.blade3{
+    transform: rotate(240deg);
+}
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card card-chart">
+            <div class="card-header">
+
+                <div class="col-sm-6 text-left">
+                    <h1 class="card-title">Погода в {{data[0]}}</h1>
+                </div>
+                <div class="card-body">
+                        <div class="chart-area-weather">
+                    <table class="tablewidget">
+                        <tbody>
+                        <tr>
+                            <td style="font-size: 60px; width: 30%">{{data[3].get('temp')}} °C</td>
+                            <td>{{data[9]|safe}}</td>
+                            <td style="font-size: 35px; width: 30%">{{data[4]}}</td>
+                        </tr>
+                        <tr>
+                            <td style="border-bottom: 0px">Ощущается как {{data[3].get('feels_like')}} °C</td>
+                            <td align="center" style="border-bottom: 0px">Минимум {{data[3].get('temp_min')}} °C &emsp; Максимум {{data[3].get('temp_max')}} °C</td>
+                            <td style="border-bottom: 0px">Осадки &nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td style="border-bottom: 0px">&nbsp;</td>
+                            <td style="border-bottom: 0px">&nbsp;</td>
+                            <td style="border-bottom: 0px">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Влажность &nbsp;{{data[2]}} %</td>
+                            <td style="border-bottom: 2px"></td>
+                            <td>Давление {{(temp_sensorsLast_cur [0][0])}} мм.рт.ст.</td>
+                        </tr>
+                        <tr>
+                            <td style="border-bottom: 0px; font-size: 60px;">{{data[8]}}</td>
+                            <td style="border-bottom: 0px; font-size: 4px;" align="center">
+                                <div class="wind-turbine">
+                                    <div class="rotor">
+                                        <div class="blade blade1"></div>
+                                        <div class="blade blade2"></div>
+                                        <div class="blade blade3"></div>
+                                    </div>
+                            </div></td>
+                            <td align="left" style="border-bottom: 0px; font-size: 60px;" id="clock"></td>
+                        </tr>
+                        <tr>
+                            <td style="border-bottom: 0px">&nbsp;</td>
+                            <td style="border-bottom: 0px">{{data[1].get('speed')}} м/с&nbsp;{{data[1].get('deg')}}°<br>Направление  {{data[10]}}</td>
+                            <td style="border-bottom: 0px">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td style="border-bottom: 0px">&nbsp;</td>
+                            <td style="border-bottom: 0px">&nbsp;</td>
+                            <td style="border-bottom: 0px">&nbsp;</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+
+    body {
+      opacity: 0.9;
+      background-color: #1e1e25;
+      /*background-size: contain;*/
+      width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    overflow: auto;
+    }
+    h1 {
+      color: #0a0c0d;
+      text-transform: uppercase;
+      padding-left: 30px;
+      font-family: "Arial Unicode MS";
+      text-shadow: 0 0 10px #2fdfe1;
+    }
+
+    h2 {
+    color: #2fdfe1;
+    text-transform: uppercase;
+    font-size: 12px;
+    /*text-align: right;*/
+    font-family: trebuchet ms;
+}
+    h3 {
+      color: #2fdfe1;
+      text-transform: uppercase;
+      font-size: 10px;
+      text-align: right;
+      font-family: trebuchet ms;
+    }
+
+
+    .form {
+      border-radius: 10px;
+      padding: 50px;
+      box-shadow: 0 0 60px #2fdfe1;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      text-align:center;
+      display: block;
+      border: none;
+    }
+
+    .form input {
+      box-shadow: 0 0 20px #2fdfe1;
+}
+
+    .form input[type="text"] {
+      padding-left: 60px;
+      border-radius: 4px;
+      width: 200px;
+      height: 30px;
+    }
+
+
+
+    .form input[type="submit"] {
+      border-radius: 4px;
+      width: 200px;
+      height: 30px;
+    }
+  </style>
+
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+  <meta name='viewport' content='width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no'/>
+  <link rel="icon" href="data:,">
+  <title>Обновление прошивки</title>
+
+</head>
+
+<div class="form">
+  <div class="block">
+    <h3>IP:<span id="ip">%IP%</span></h3>
+  <div style="text-align: center;"><h1 style="color:white;">ПОКАЗАНИЯ ДАТЧИКА SmartCore-S1 </h1></div><br>
+          <h1 style="color:white;">🌡 <span id="temperature">%TEMPERATURE%</span> ℃</h1><br>
+          <h1 style="color:white;">💧 <span id="humidity">%HUMIDITY%</span> <span id="symbol">%SYMBOL%</span></h1><br>
+
+  <form method='POST' action='/index' enctype='multipart/form-data'>
+      <h2>Загрузить файл прошивки...</h2>
+    <input type='file' name='update' required autofocus>&nbsp&nbsp&nbsp&nbsp
+    <input type='submit' value='Загрузить' onclick="this.value='Подождите...';">
+    <h2>&nbsp</h2>
+    <br><br><br>
+      <h3>Загружать только .bin файл</h3>
+      <h3>Версия системы <span id="version">%VERSION%</span></h3>
+  </form>
+</div>
+</div>
+</body>
+</html>

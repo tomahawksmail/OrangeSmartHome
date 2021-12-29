@@ -1,0 +1,8 @@
+table.tableclassnoborderclass {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    border: 0px;
+    border-color: #ffffff;
+}
+

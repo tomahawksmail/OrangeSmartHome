@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}SmartHome CORE ver.{{ version }}{% endblock %}
+
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card card-chart">
+            <div class="card-header">
+                <div class="col-sm-6 text-left">
+                    <h5 class="card-title">Лог событий</h5>
+                </div>
+                <div>
+                    <table class="tableclass" align="center">
+                        <thead>
+                        <tr>
+                            <th>ID события</th>
+                            <th>Дата и время</th>
+                            <th>Элемент</th>
+                            <th>Состояние</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in log %}
+                        <tr>
+                            <td>{{ item[0] }}</td>
+                            <td>{{ item[1] }}</td>
+                            <td>{{ item[2] }}</td>
+                            <td>{{ item[3] }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

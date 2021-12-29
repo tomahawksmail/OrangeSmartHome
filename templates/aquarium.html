@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+{% block title %}SmartHome CORE ver.{{ version }}{% endblock %}
+
+
+{% block head %}
+<script src='/static/js/Chart.min.js'></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+setTimeout(function () {location.reload();}, 600000);
+</script>
+<style>
+   INPUT[type="text"] {
+        background-color: #525f7f;
+        color: #b1b1b1;
+        border:0px solid #b1b1b1;
+    border-radius:7px;
+   }
+  </style>
+{% endblock %}
+
+
+{% block content %}
+
+
+<form method="POST" action="aquarium">
+
+<div class="row">
+        <div class="col-9">
+            <div class="card card-chart">
+                <div class="card-header">
+
+                    <div class="col-sm-6 text-left">
+<!--                        <h5 class="card-title">Данные за сутки</h5>-->
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="aquatemp"></canvas>
+                            <script>
+                                var ctx = document.getElementById('aquatemp').getContext('2d');
+                                var gradient1 = ctx.createLinearGradient(0, 0, 0, 200);
+                                    gradient1.addColorStop(0, 'rgba(192,0,0,0.2)');
+                                    gradient1.addColorStop(0.5, 'rgba(0,255,0,0.2)');
+                                    gradient1.addColorStop(1, 'rgba(192,0,0,0.2)');
+                                var aquatemp = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: [{% for item in data %} "{{item[0]}}",  {% endfor %}],
+                                        datasets: [{
+                                            label: 'Температура, °C',
+                                            data: [{% for item in data %} {{item[1]}}, {% endfor %}],
+                                            fill: true,
+                                            lineTension: 0.3,
+                                            backgroundColor: gradient1,
+                                            borderColor: "rgba(255,255,255,1)",
+                                            borderCapStyle: 'butt',
+                                            borderDash: [],
+                                            borderDashOffset: 0.0,
+                                            borderJoinStyle: 'miter',
+                                            pointBorderColor: "rgb(255,255,255)",
+                                            pointBackgroundColor: "#fff",
+                                            pointBorderWidth: 1,
+                                            pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgb(192,0,0)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            pointHoverBorderWidth: 2,
+                                            pointRadius: 1,
+                                            pointHitRadius: 10,
+                                            spanGaps: false,
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        layout: {
+                                            padding: {
+                                                left: 2,
+                                                right: 2,
+                                                top: 2,
+                                                bottom: 2
+                                            },
+                                            animation: {
+                                                duration: 10
+                                            }
+                                        },
+
+                                        scales: {}
+                                    }
+                                });
+                            </script>
+                        </div>
+                        <div class="chart-area">
+                            <canvas id="aquaph"></canvas>
+                            <script>
+                                var ctx = document.getElementById('aquaph').getContext('2d');
+                                var gradient2 = ctx.createLinearGradient(0, 0, 0, 100);
+                                    gradient2.addColorStop(0, 'rgba(255,0,0,0.2)');
+                                    gradient2.addColorStop(0.5, 'rgba(0,255,0,0.2)');
+                                    gradient2.addColorStop(1, 'rgba(255,0,0,0.2)');
+                                var aquaph = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: [{% for item in data %} "{{item[0]}}",  {% endfor %}],
+                                        datasets: [{
+                                            label: 'Жесткость, ph',
+                                            data: [{% for item in data %} {{item[2]}}, {% endfor %}],
+                                            fill: true,
+                                            lineTension: 0.3,
+                                            backgroundColor: gradient2,
+                                            borderColor: "rgba(255,255,255,1)",
+                                            borderCapStyle: 'butt',
+                                            borderDash: [],
+                                            borderDashOffset: 0.0,
+                                            borderJoinStyle: 'miter',
+                                            pointBorderColor: "rgb(192,0,0)",
+                                            pointBackgroundColor: "#fff",
+                                            pointBorderWidth: 1,
+                                            pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgb(192,0,0)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            pointHoverBorderWidth: 2,
+                                            pointRadius: 1,
+                                            pointHitRadius: 10,
+                                            spanGaps: false,
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        layout: {
+                                            padding: {
+                                                left: 2,
+                                                right: 2,
+                                                top: 2,
+                                                bottom: 2
+                                            },
+                                            animation: {
+                                                duration: 10
+                                            }
+                                        },
+
+                                        scales: {}
+                                    }
+                                });
+                            </script>
+                        </div>
+                        <div class="chart-area">
+                            <canvas id="aquaTDS"></canvas>
+                            <script>
+                                var ctx = document.getElementById('aquaTDS').getContext('2d');
+                                var gradient3 = ctx.createLinearGradient(0, 0, 0, 100);
+                                    gradient3.addColorStop(0, 'rgba(255,0,0,0.2)');
+                                    gradient3.addColorStop(0.5, 'rgba(255,222,0,0.2)');
+                                    gradient3.addColorStop(1, 'rgba(0,149,0,0.2)');
+                                var aquaTDS = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: [{% for item in data %} "{{item[0]}}",  {% endfor %}],
+                                        datasets: [{
+                                            label: 'Общая минерализация',
+                                            data: [{% for item in data %} {{item[3]}}, {% endfor %}],
+                                            lineTension: 0.3,
+                                            backgroundColor: gradient3,
+                                            borderColor: "rgba(255,255,255,1)",
+                                            borderCapStyle: 'butt',
+                                            borderDash: [],
+                                            borderDashOffset: 0.0,
+                                            borderJoinStyle: 'miter',
+                                            pointBorderColor: "rgb(192,0,0)",
+                                            pointBackgroundColor: "#fff",
+                                            pointBorderWidth: 1,
+                                            pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgb(192,0,0)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            pointHoverBorderWidth: 2,
+                                            pointRadius: 1,
+                                            pointHitRadius: 10,
+                                            spanGaps: false,
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        layout: {
+                                            padding: {
+                                                left: 2,
+                                                right: 2,
+                                                top: 2,
+                                                bottom: 2
+                                            },
+                                            animation: {
+                                                duration: 10
+                                            }
+                                        },
+
+                                        scales: {}
+                                    }
+                                });
+                            </script>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="col-3">
+        <div class="card card-chart">
+            <div class="card-header">
+
+                <div class="col-sm-6 text-left">
+
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+
+                        <div style="text-align: center; line-height: 500%; color: rgb(219,219,219); font-size: 250%"> {{datanow[0][1]}} °C</div><br>
+                    </div>
+                    <div class="chart-area">
+                        <div style="text-align: center; line-height: 500%; color: rgb(219,219,219); font-size: 250%"> {{datanow[0][2]}} ph</div><br>
+                    </div>
+                    <div class="chart-area">
+                        <div style="text-align: center; line-height: 500%; color: rgb(219,219,219); font-size: 250%"> {{datanow[0][3]}} °C</div><br>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</form>
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

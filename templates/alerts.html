@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}SmartHome CORE ver.{{ version }}{% endblock %}
+
+{% block head %}
+<script src='/static/js/Chart.min.js'></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+
+{% block content %}
+<form method="POST" action="alerts">
+<div class="row">
+    <div class="col-12">
+        <div class="card card-chart">
+            <div class="card-header">
+                <div class="col-sm-6 text-left">
+                    <h5 class="card-title">Аварии системы</h5>
+                </div>
+                <div>
+                    <table class="tableclass">
+                        <thead>
+                        <tr>
+                            <th>ID события</th>
+                            <th>Дата и время</th>
+                            <th>Функция</th>
+                            <th>Код ошибки</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in Errorslog_all %}
+                        <tr>
+                            <td>{{ item[0] }}</td>
+                            <td>{{ item[1] }}</td>
+                            <td>{{ item[2] }}</td>
+                            <td>{{ item[3] }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <input type="submit" value="Очистить" name="btn" style="width:90%; align:center">
+                    <h5 class="card-title">&nbsp;</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </form>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

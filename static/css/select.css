@@ -1,0 +1,13 @@
+select {
+  appearance: none;
+  background-color: #27293d;
+  color: #fff;
+  border: none;
+  padding: 0 1em 0 1em;
+  /*margin: 0;*/
+  /*width: 100%;*/
+  font-family: inherit;
+  /*font-size: 14px;*/
+  /*cursor: inherit;*/
+  /*line-height: 18px;*/
+}

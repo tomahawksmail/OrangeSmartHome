@@ -1,0 +1,290 @@
+{% extends "base.html" %}
+{% block title %}SmartHome CORE ver.{{ version }}{% endblock %}
+
+
+{% block head %}
+<!--<script src='/static/js/Chart.min.js'></script>-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<!-----------------------------1 ----------------->
+<form method="POST" action="control">
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-title">Управление освещением блок 1</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <table class="tableclassnoborderclass">
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td><div class="switch">
+
+                                        {% if stateswitches.get('chek1') == 1 %}
+                                        <input type="checkbox" checked="" id="switch-1" class="switch-check" name="switch-1"/>
+                                        {% else %}
+                                        <input type="checkbox"            id="switch-1" class="switch-check" name="switch-1"/>
+                                        {% endif %}
+                                        <label for="switch-1" class="switch-label">
+                                            <span class="switch-slider switch-slider-on"></span>
+                                            <span class="switch-slider switch-slider-off"></span>
+                                        </label>
+                                    </div></td>
+                                    <td><div class="switch">
+                                        {% if stateswitches.get('chek2') == 1 %}
+                                        <input type="checkbox" checked="" id="switch-2" class="switch-check" name="switch-2"/>
+                                        {% else %}
+                                        <input type="checkbox"            id="switch-2" class="switch-check" name="switch-2"/>
+                                        {% endif %}
+                                        <label for="switch-2" class="switch-label">
+                                            <span class="switch-slider switch-slider-on"></span>
+                                            <span class="switch-slider switch-slider-off"></span>
+                                        </label>
+                                    </div></td>
+                                    <td><div class="switch">
+                                        {% if stateswitches.get('chek3') == 1 %}
+                                        <input type="checkbox" checked="" id="switch-3" class="switch-check" name="switch-3"/>
+                                        {% else %}
+                                        <input type="checkbox"            id="switch-3" class="switch-check" name="switch-3"/>
+                                        {% endif %}
+                                        <label for="switch-3" class="switch-label">
+                                            <span class="switch-slider switch-slider-on"></span>
+                                            <span class="switch-slider switch-slider-off"></span>
+                                        </label>
+                                    </div></td>
+                                    <td><div class="switch">
+                                        {% if stateswitches.get('chek4') == 1 %}
+                                        <input type="checkbox" checked="" id="switch-4" class="switch-check" name="switch-4"/>
+                                        {% else %}
+                                        <input type="checkbox"            id="switch-4" class="switch-check" name="switch-4"/>
+                                        {% endif %}
+                                        <label for="switch-4" class="switch-label">
+                                            <span class="switch-slider switch-slider-on"></span>
+                                            <span class="switch-slider switch-slider-off"></span>
+                                        </label>
+                                    </div></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td>8</td>
+                                </tr>
+                                <tr>
+                                    <td><div class="switch">
+                                        {% if stateswitches.get('chek5') == 1 %}
+                                        <input type="checkbox" checked="" id="switch-5" class="switch-check" name="switch-5"/>
+                                        {% else %}
+                                        <input type="checkbox"            id="switch-5" class="switch-check" name="switch-5"/>
+                                        {% endif %}
+                                        <label for="switch-5" class="switch-label">
+                                            <span class="switch-slider switch-slider-on"></span>
+                                            <span class="switch-slider switch-slider-off"></span>
+                                        </label>
+                                    </div></td>
+                                    <td><div class="switch">
+                                        {% if stateswitches.get('chek6') == 1 %}
+                                        <input type="checkbox" checked="" id="switch-6" class="switch-check" name="switch-6"/>
+                                        {% else %}
+                                        <input type="checkbox"            id="switch-6" class="switch-check" name="switch-6"/>
+                                        {% endif %}
+                                        <label for="switch-6" class="switch-label">
+                                            <span class="switch-slider switch-slider-on"></span>
+                                            <span class="switch-slider switch-slider-off"></span>
+                                        </label>
+                                    </div></td>
+                                    <td><div class="switch">
+                                        {% if stateswitches.get('chek7') == 1 %}
+                                        <input type="checkbox" checked="" id="switch-7" class="switch-check" name="switch-7"/>
+                                        {% else %}
+                                        <input type="checkbox"            id="switch-7" class="switch-check" name="switch-7"/>
+                                        {% endif %}
+                                        <label for="switch-7" class="switch-label">
+                                            <span class="switch-slider switch-slider-on"></span>
+                                            <span class="switch-slider switch-slider-off"></span>
+                                        </label>
+                                    </div></td>
+                                    <td><div class="switch">
+                                        {% if stateswitches.get('chek8') == 1 %}
+                                        <input type="checkbox" checked="" id="switch-8" class="switch-check" name="switch-8"/>
+                                        {% else %}
+                                        <input type="checkbox"            id="switch-8" class="switch-check" name="switch-8"/>
+                                        {% endif %}
+                                        <label for="switch-8" class="switch-label">
+                                            <span class="switch-slider switch-slider-on"></span>
+                                            <span class="switch-slider switch-slider-off"></span>
+                                        </label>
+                                    </div></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-----------------------------2 ----------------->
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-title">Управление освещением блок 2</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <table class="tableclassnoborderclass">
+                                <tbody>
+                                <tr>
+                                    <td>9</td>
+                                    <td>10</td>
+                                    <td>11</td>
+                                    <td>12</td>
+                                </tr>
+                                <tr>
+                                    <td><div class="switch">
+                                        {% if stateswitches.get('chek9') == 1 %}
+                                        <input type="checkbox" checked="" id="switch-9" class="switch-check" name="switch-9"/>
+                                        {% else %}
+                                        <input type="checkbox"            id="switch-9" class="switch-check" name="switch-9"/>
+                                        {% endif %}
+                                        <label for="switch-9" class="switch-label">
+                                            <span class="switch-slider switch-slider-on"></span>
+                                            <span class="switch-slider switch-slider-off"></span>
+                                        </label>
+                                    </div></td>
+                                    <td><div class="switch">
+                                        {% if stateswitches.get('chek10') == 1 %}
+                                        <input type="checkbox" checked="" id="switch-10" class="switch-check" name="switch-10"/>
+                                        {% else %}
+                                        <input type="checkbox"            id="switch-10" class="switch-check" name="switch-10"/>
+                                        {% endif %}
+                                        <label for="switch-10" class="switch-label">
+                                            <span class="switch-slider switch-slider-on"></span>
+                                            <span class="switch-slider switch-slider-off"></span>
+                                        </label>
+                                    </div></td>
+                                    <td><div class="switch">
+                                        {% if stateswitches.get('chek11') == 1 %}
+                                        <input type="checkbox" checked="" id="switch-11" class="switch-check" name="switch-11"/>
+                                        {% else %}
+                                        <input type="checkbox"            id="switch-11" class="switch-check" name="switch-11"/>
+                                        {% endif %}
+                                        <label for="switch-11" class="switch-label">
+                                            <span class="switch-slider switch-slider-on"></span>
+                                            <span class="switch-slider switch-slider-off"></span>
+                                        </label>
+                                    </div></td>
+                                    <td><div class="switch">
+                                        {% if stateswitches.get('chek12') == 1 %}
+                                        <input type="checkbox" checked="" id="switch-12" class="switch-check" name="switch-12"/>
+                                        {% else %}
+                                        <input type="checkbox"            id="switch-12" class="switch-check" name="switch-12"/>
+                                        {% endif %}
+                                        <label for="switch-12" class="switch-label">
+                                            <span class="switch-slider switch-slider-on"></span>
+                                            <span class="switch-slider switch-slider-off"></span>
+                                        </label>
+                                    </div></td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td>14</td>
+                                    <td>15</td>
+                                    <td>16</td>
+                                </tr>
+                                <tr>
+                                    <td><div class="switch">
+                                        {% if stateswitches.get('chek13') == 1 %}
+                                        <input type="checkbox" checked="" id="switch-13" class="switch-check" name="switch-13"/>
+                                        {% else %}
+                                        <input type="checkbox"            id="switch-13" class="switch-check" name="switch-13"/>
+                                        {% endif %}
+                                        <label for="switch-13" class="switch-label">
+                                            <span class="switch-slider switch-slider-on"></span>
+                                            <span class="switch-slider switch-slider-off"></span>
+                                        </label>
+                                    </div></td>
+                                    <td><div class="switch">
+                                        {% if stateswitches.get('chek14') == 1 %}
+                                        <input type="checkbox" checked="" id="switch-14" class="switch-check" name="switch-14"/>
+                                        {% else %}
+                                        <input type="checkbox"            id="switch-14" class="switch-check" name="switch-14"/>
+                                        {% endif %}
+                                        <label for="switch-14" class="switch-label">
+                                            <span class="switch-slider switch-slider-on"></span>
+                                            <span class="switch-slider switch-slider-off"></span>
+                                        </label>
+                                    </div></td>
+                                    <td><div class="switch">
+                                        {% if stateswitches.get('chek15') == 1 %}
+                                        <input type="checkbox" checked="" id="switch-15" class="switch-check" name="switch-15"/>
+                                        {% else %}
+                                        <input type="checkbox"            id="switch-15" class="switch-check" name="switch-15"/>
+                                        {% endif %}
+                                        <label for="switch-15" class="switch-label">
+                                            <span class="switch-slider switch-slider-on"></span>
+                                            <span class="switch-slider switch-slider-off"></span>
+                                        </label>
+                                    </div></td>
+                                    <td><div class="switch">
+                                        {% if stateswitches.get('chek16') == 1 %}
+                                        <input type="checkbox" checked="" id="switch-16" class="switch-check" name="switch-16"/>
+                                        {% else %}
+                                        <input type="checkbox"            id="switch-16" class="switch-check" name="switch-16"/>
+                                        {% endif %}
+                                        <label for="switch-16" class="switch-label">
+                                            <span class="switch-slider switch-slider-on"></span>
+                                            <span class="switch-slider switch-slider-off"></span>
+                                        </label>
+                                    </div></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-lg-12">
+            <div class="card card-chart" height="50px">
+                <div class="card-header">
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-title"></h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area-submit">
+                            <input type="submit" value="Установить" name="change"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+</div>
+</form>
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
